@@ -19,6 +19,10 @@ public class Details {
     @Column(nullable = false)
     private LocalDate birthDate;
 
+    public Details(){
+
+    }
+
     public int getDetailsId() {
         return detailsId;
     }

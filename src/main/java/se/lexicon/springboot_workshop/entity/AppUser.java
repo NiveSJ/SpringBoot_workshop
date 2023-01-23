@@ -22,9 +22,11 @@ public class AppUser {
 
 
 
-    private AppUser(){
+    public AppUser(){
 
     }
+
+
 
   public int getAppUserId() {
     return appUserId;
