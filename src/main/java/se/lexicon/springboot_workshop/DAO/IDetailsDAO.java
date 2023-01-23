@@ -11,9 +11,9 @@ public interface IDetailsDAO {
 
     Collection<Details> findAll();
 
-    Details create();
+    Details create(Details details);
 
-    Details update();
+    Details update(Details details);
 
-    void delete();
+    void delete(Details details);
 }

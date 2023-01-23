@@ -11,15 +11,15 @@ public class Details {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int detailsId;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false,length = 30)
+    @Column(nullable = false, length = 30)
     private String name;
     @Column(nullable = false)
     private LocalDate birthDate;
 
-    public Details(){
+    public Details() {
 
     }
 

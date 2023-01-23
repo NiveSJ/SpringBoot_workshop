@@ -17,17 +17,17 @@ public class DetailsDAOImpl implements IDetailsDAO {
     }
 
     @Override
-    public Details create() {
+    public Details create(Details details) {
         return null;
     }
 
     @Override
-    public Details update() {
+    public Details update(Details details) {
         return null;
     }
 
     @Override
-    public void delete() {
+    public void delete(Details details) {
 
     }
 }

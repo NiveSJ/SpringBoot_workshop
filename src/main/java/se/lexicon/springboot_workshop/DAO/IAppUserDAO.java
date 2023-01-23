@@ -10,11 +10,11 @@ public interface IAppUserDAO {
 
     Collection<AppUser> findAll();
 
-    AppUser create();
+    AppUser create(AppUser appUser);
 
-    AppUser update();
+    AppUser update(AppUser appUser);
 
-    void delete();
+    void delete(AppUser appUser);
 
 
 }

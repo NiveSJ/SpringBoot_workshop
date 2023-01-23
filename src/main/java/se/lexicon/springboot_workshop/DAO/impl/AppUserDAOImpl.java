@@ -17,17 +17,17 @@ public class AppUserDAOImpl implements IAppUserDAO {
     }
 
     @Override
-    public AppUser create() {
+    public AppUser create(AppUser appUser) {
         return null;
     }
 
     @Override
-    public AppUser update() {
+    public AppUser update(AppUser appUser) {
         return null;
     }
 
     @Override
-    public void delete() {
+    public void delete(AppUser appUser) {
 
     }
 }
