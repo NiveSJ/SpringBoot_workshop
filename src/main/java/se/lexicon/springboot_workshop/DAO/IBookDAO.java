@@ -10,9 +10,9 @@ public interface IBookDAO {
 
     Collection<Book> findAll();
 
-    Book create();
+    Book create(Book book);
 
     Book update(Book book);
 
-    void delete(Book book);
+    void delete(int id);
 }

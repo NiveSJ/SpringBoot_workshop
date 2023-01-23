@@ -1,10 +1,11 @@
 package se.lexicon.springboot_workshop.entity;
 
 import javax.persistence.*;
-import java.awt.print.Book;
+
 import java.time.LocalDate;
 
 @Entity
+@NamedQuery(name="findAll",query = "FROM BookLoan")
 public class BookLoan {
 
     @Id
@@ -24,7 +25,7 @@ public class BookLoan {
     private Book book;
 
 
-    public BookLoan(int loanId) {
-        LoanId = loanId;
+    public BookLoan() {
+
     }
 }

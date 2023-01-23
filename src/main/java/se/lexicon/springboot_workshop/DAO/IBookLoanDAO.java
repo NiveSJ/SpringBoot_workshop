@@ -12,9 +12,9 @@ public interface IBookLoanDAO {
 
     Collection<BookLoan> findAll();
 
-    BookLoan create();
+    BookLoan create(BookLoan bookLoan);
 
     BookLoan update(BookLoan bookLoan);
 
-    void delete(BookLoan bookLoan);
+    void delete(int id);
 }

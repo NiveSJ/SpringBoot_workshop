@@ -3,6 +3,7 @@ package se.lexicon.springboot_workshop.entity;
 import javax.persistence.*;
 import java.util.Set;
 @Entity
+@NamedQuery(name="findAll",query = "FROM Author")
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

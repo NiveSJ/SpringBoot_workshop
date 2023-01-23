@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
+@NamedQuery(name="findAll",query = "FROM Details")
 public class Details {
 
     @Id

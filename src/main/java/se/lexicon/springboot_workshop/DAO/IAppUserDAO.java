@@ -14,7 +14,7 @@ public interface IAppUserDAO {
 
     AppUser update(AppUser appUser);
 
-    void delete(AppUser appUser);
+    void delete(int id);
 
 
 }

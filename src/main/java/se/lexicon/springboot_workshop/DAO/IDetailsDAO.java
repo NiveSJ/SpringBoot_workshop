@@ -15,5 +15,5 @@ public interface IDetailsDAO {
 
     Details update(Details details);
 
-    void delete(Details details);
+    void delete(int id);
 }

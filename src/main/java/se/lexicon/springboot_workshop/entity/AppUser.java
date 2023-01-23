@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
+@NamedQuery(name="findAll",query = "FROM AppUser ")
 public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +26,20 @@ public class AppUser {
 
     }
 
+    public AppUser(String userName, String password, LocalDate regDate, Details details) {
+        this.userName = userName;
+        this.password = password;
+        this.regDate = regDate;
+        this.details = details;
+    }
+
+    public AppUser(int appUserId, String userName, String password, LocalDate regDate, Details details) {
+        this.appUserId = appUserId;
+        this.userName = userName;
+        this.password = password;
+        this.regDate = regDate;
+        this.details = details;
+    }
 
     public int getAppUserId() {
         return appUserId;
@@ -77,5 +92,16 @@ public class AppUser {
     @Override
     public int hashCode() {
         return Objects.hash(appUserId, userName, password, regDate, details);
+    }
+
+    @Override
+    public String toString() {
+        return "AppUser{" +
+                "appUserId=" + appUserId +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", regDate=" + regDate +
+                ", details=" + details +
+                '}';
     }
 }
