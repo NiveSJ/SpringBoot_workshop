@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@NamedQuery(name="findAll",query = "FROM Details")
+@NamedQuery(name="Details.findAll",query = "FROM Details")
 public class Details {
 
     @Id
@@ -22,6 +22,19 @@ public class Details {
 
     public Details() {
 
+    }
+
+    public Details(String email, String name, LocalDate birthDate) {
+        this.email = email;
+        this.name = name;
+        this.birthDate = birthDate;
+    }
+
+    public Details(int detailsId, String email, String name, LocalDate birthDate) {
+        this.detailsId = detailsId;
+        this.email = email;
+        this.name = name;
+        this.birthDate = birthDate;
     }
 
     public int getDetailsId() {
@@ -68,6 +81,7 @@ public class Details {
     public int hashCode() {
         return Objects.hash(detailsId, email, name, birthDate);
     }
+
 
     @Override
     public String toString() {

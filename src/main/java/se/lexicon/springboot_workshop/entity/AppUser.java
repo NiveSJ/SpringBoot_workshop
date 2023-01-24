@@ -2,24 +2,29 @@ package se.lexicon.springboot_workshop.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@NamedQuery(name="findAll",query = "FROM AppUser ")
+@NamedQuery(name="AppUser.findAll",query = "FROM AppUser ")
 public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int appUserId;
 
-    @Column(length = 30, nullable = false, unique = true)
+    @Column(unique = true)
     private String userName;
 
     private String password;
     @Column(nullable = false)
     private LocalDate regDate;
+    // if app User is removed then details has to be removed
     @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
-    @JoinColumn(name = "details_id")
+    @JoinColumn(name = "details_id")     // Making foreign key here
     private Details details;
+    @OneToMany (mappedBy = "borrower")   // Owner class. So we need to populate list through convenience method
+    private List<BookLoan> loan;
 
 
     public AppUser() {
@@ -80,6 +85,34 @@ public class AppUser {
     public void setDetails(Details details) {
         this.details = details;
     }
+
+
+    //  private List<BookLoan> loan;
+
+    public void addBookLoan(BookLoan bookLoan)
+
+    {
+        if(bookLoan == null) throw new IllegalArgumentException("Book Loan field cannot be empty");
+        if(loan.isEmpty()) loan= new ArrayList<>(); // To handle null Pointer exception
+
+        loan.add(bookLoan);
+        //Since it is two way need to populate AppUser field in book Loan
+        bookLoan.setBorrower(this);
+
+    }
+
+
+
+    public void removeBookLoan(BookLoan bookLoan)
+    {
+        if(bookLoan == null) throw new IllegalArgumentException("Book Loan field cannot be empty");
+      // Need to make App user null the remove from list
+        bookLoan.setBorrower(null);
+        loan.remove(bookLoan);
+    }
+
+
+
 
     @Override
     public boolean equals(Object o) {

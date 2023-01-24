@@ -1,11 +1,12 @@
 package se.lexicon.springboot_workshop.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@NamedQuery(name="findAll",query = "FROM Book")
+@NamedQuery(name="Book.findAll",query = "FROM Book")
 public class Book {
 
     @Id
@@ -16,7 +17,7 @@ public class Book {
     @Column(nullable = false,length = 100)
     private String title;
 
-    @ManyToMany(mappedBy = "writtenBook")
+    @ManyToMany(mappedBy = "writtenBook",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     private Set<Author> authors;
 
     @Column(nullable = false)
@@ -79,6 +80,36 @@ public class Book {
     public void setMaxLoanDays(int maxLoanDays) {
         this.maxLoanDays = maxLoanDays;
     }
+
+
+  //  private Set<Author> authors;
+
+  public void setAuthors(Author author)
+  {
+      if(author == null) throw new IllegalArgumentException("author cannot be null");
+      if (authors.isEmpty()) authors = new HashSet<>();
+      // Populate the set present in this class
+    authors.add(author);
+    // set book to the author
+    author.getWrittenBook().add(this);
+
+  }
+
+  public void removeAuthors(Author author){
+      if(author == null) throw new IllegalArgumentException("author cannot be null");
+
+      author.getWrittenBook().remove(this); // removing associated Book
+      authors.remove(author);
+
+
+
+  }
+
+
+
+
+
+
 
     @Override
     public boolean equals(Object o) {
