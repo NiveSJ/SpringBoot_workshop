@@ -102,7 +102,7 @@ public class AppCommandLineRunner implements CommandLineRunner {
         authorDAO.create(author1);
 
        bookLoanDAOimpl.create(bookLoan);
-      //  bookLoanDAOimpl.create(bookLoan1);
+      bookLoanDAOimpl.create(bookLoan1);
 
 
 
