@@ -32,11 +32,19 @@ public class Book {
         this.maxLoanDays = maxLoanDays;
     }
 
+
+    public Book(String isbn, String title, int maxLoanDays) {
+        this.isbn = isbn;
+        this.title = title;
+
+        this.maxLoanDays = maxLoanDays;
+    }
+
     public Book(int bookId, String isbn, String title, Set<Author> authors, int maxLoanDays) {
         this.bookId = bookId;
         this.isbn = isbn;
         this.title = title;
-        this.authors = authors;
+        setAuthors(authors);
         this.maxLoanDays = maxLoanDays;
     }
 
@@ -66,6 +74,10 @@ public class Book {
     }
 
     public Set<Author> getAuthors() {
+
+        if(authors == null)
+            authors = new HashSet<>();
+
         return authors;
     }
 
@@ -87,7 +99,8 @@ public class Book {
   public void setAuthors(Author author)
   {
       if(author == null) throw new IllegalArgumentException("author cannot be null");
-      if (authors.isEmpty()) authors = new HashSet<>();
+     if (authors == null)
+         authors = new HashSet<>();
       // Populate the set present in this class
     authors.add(author);
     // set book to the author

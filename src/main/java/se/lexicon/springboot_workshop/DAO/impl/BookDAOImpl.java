@@ -25,11 +25,13 @@ public class BookDAOImpl implements IBookDAO {
     }
 
     @Override
+    @Transactional
     public Collection<Book> findAll() {
         return entityManager.createNamedQuery("findAll").getResultList();
     }
 
     @Override
+    @Transactional
     public Book create(Book Book) {
         if (Book == null) throw new IllegalArgumentException("Book Cannot be null");
 
@@ -38,6 +40,7 @@ public class BookDAOImpl implements IBookDAO {
     }
 
     @Override
+    @Transactional
     public Book update(Book Book) {
         if (Book == null) throw new IllegalArgumentException("Book Cannot be null");
 
@@ -46,6 +49,7 @@ public class BookDAOImpl implements IBookDAO {
     }
 
     @Override
+    @Transactional
     public void delete(int id) {
         Book Book= entityManager.find(Book.class,id);
         if (Book!= null) entityManager.remove(Book);

@@ -24,19 +24,21 @@ public class AppUserDAOImpl implements IAppUserDAO {
     }
 
     @Override
+    @Transactional
     public Collection<AppUser> findAll() {
         return entityManager.createNamedQuery("findAll").getResultList();
     }
 
     @Override
-    public AppUser create(AppUser AppUser) {
-        if (AppUser == null) throw new IllegalArgumentException("AppUser Cannot be null");
-
-        entityManager.persist(AppUser);
-        return AppUser;
+    @Transactional
+    public AppUser create(AppUser appUser) {
+        if (appUser == null) throw new IllegalArgumentException("AppUser Cannot be null");
+        entityManager.persist(appUser);
+        return appUser;
     }
 
     @Override
+    @Transactional
     public AppUser update(AppUser AppUser) {
         if (AppUser == null) throw new IllegalArgumentException("AppUser Cannot be null");
 
@@ -45,6 +47,7 @@ public class AppUserDAOImpl implements IAppUserDAO {
     }
 
     @Override
+    @Transactional
     public void delete(int id) {
         AppUser AppUser= entityManager.find(AppUser.class,id);
         if (AppUser!= null) entityManager.remove(AppUser);

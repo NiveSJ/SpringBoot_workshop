@@ -20,7 +20,7 @@ public class AppUser {
     @Column(nullable = false)
     private LocalDate regDate;
     // if app User is removed then details has to be removed
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE})
+    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE})
     @JoinColumn(name = "details_id")     // Making foreign key here
     private Details details;
     @OneToMany (mappedBy = "borrower")   // Owner class. So we need to populate list through convenience method
@@ -35,7 +35,14 @@ public class AppUser {
         this.userName = userName;
         this.password = password;
         this.regDate = regDate;
-        this.details = details;
+         setDetails(details);
+    }
+
+    public AppUser(String userName, String password, LocalDate regDate) {
+        this.userName = userName;
+        this.password = password;
+        this.regDate = regDate;
+
     }
 
     public AppUser(int appUserId, String userName, String password, LocalDate regDate, Details details) {

@@ -1,7 +1,5 @@
 package se.lexicon.springboot_workshop.DAO;
 
-import se.lexicon.springboot_workshop.DAO.impl.BookLoanDAO;
-import se.lexicon.springboot_workshop.entity.Book;
 import se.lexicon.springboot_workshop.entity.BookLoan;
 
 import java.util.Collection;

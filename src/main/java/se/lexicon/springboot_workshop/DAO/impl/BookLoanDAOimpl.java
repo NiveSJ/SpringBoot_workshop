@@ -11,7 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Collection;
 @Repository
-public class BookLoanDAO implements IBookLoanDAO {
+public class BookLoanDAOimpl implements IBookLoanDAO {
     @PersistenceContext
     EntityManager entityManager;
 
@@ -25,19 +25,22 @@ public class BookLoanDAO implements IBookLoanDAO {
     }
 
     @Override
+    @Transactional
     public Collection<BookLoan> findAll() {
         return entityManager.createNamedQuery("findAll").getResultList();
     }
 
     @Override
-    public BookLoan create(BookLoan BookLoan) {
-        if (BookLoan == null) throw new IllegalArgumentException("BookLoan Cannot be null");
+    @Transactional
+    public BookLoan create(BookLoan bookLoan) {
+        if (bookLoan == null) throw new IllegalArgumentException("BookLoan Cannot be null");
 
-        entityManager.persist(BookLoan);
-        return BookLoan;
+        entityManager.persist(bookLoan);
+        return bookLoan;
     }
 
     @Override
+    @Transactional
     public BookLoan update(BookLoan BookLoan) {
         if (BookLoan == null) throw new IllegalArgumentException("BookLoan Cannot be null");
 
@@ -46,6 +49,7 @@ public class BookLoanDAO implements IBookLoanDAO {
     }
 
     @Override
+    @Transactional
     public void delete(int id) {
         BookLoan BookLoan= entityManager.find(BookLoan.class,id);
         if (BookLoan!= null) entityManager.remove(BookLoan);

@@ -25,11 +25,13 @@ public class AuthorDAOImpl implements IAuthorDAO {
     }
 
     @Override
+    @Transactional
     public Collection<Author> findAll() {
         return entityManager.createNamedQuery("findAll").getResultList();
     }
 
     @Override
+    @Transactional
     public Author create(Author author) {
         if (author == null) throw new IllegalArgumentException("Author Cannot be null");
 
@@ -38,6 +40,7 @@ public class AuthorDAOImpl implements IAuthorDAO {
     }
 
     @Override
+    @Transactional
     public Author update(Author author) {
         if (author == null) throw new IllegalArgumentException("Author Cannot be null");
 
@@ -46,6 +49,7 @@ public class AuthorDAOImpl implements IAuthorDAO {
     }
 
     @Override
+    @Transactional
     public void delete(int id) {
         Author author= entityManager.find(Author.class,id);
         if (author!= null) entityManager.remove(author);

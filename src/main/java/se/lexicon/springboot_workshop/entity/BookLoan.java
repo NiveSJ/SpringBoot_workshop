@@ -21,7 +21,7 @@ public class BookLoan {
     @JoinColumn(name = "app_user_id")   // Foreign Key
     private AppUser borrower;
 
-    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name= "book_id")
     private Book book;
 
@@ -36,6 +36,14 @@ public class BookLoan {
         this.returned = returned;
         this.borrower = borrower;
         this.book = book;
+    }
+
+    public BookLoan(LocalDate loanDate, LocalDate dueDate, boolean returned) {
+        this.loanDate = loanDate;
+        this.dueDate = dueDate;
+        this.returned = returned;
+
+
     }
 
 

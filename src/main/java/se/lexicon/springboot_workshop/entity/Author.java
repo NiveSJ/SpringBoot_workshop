@@ -4,15 +4,16 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
 @Entity
-@NamedQuery(name="Author.findAll",query = "FROM Author")
+@NamedQuery(name = "Author.findAll", query = "FROM Author")
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int authorId;
-   @Column(nullable = false,length = 30)
+    @Column(nullable = false, length = 30)
     private String firstName;
-    @Column(nullable = false,length = 30)
+    @Column(nullable = false, length = 30)
     private String lastName;
 
     @ManyToMany
@@ -25,6 +26,13 @@ public class Author {
         this.firstName = firstName;
         this.lastName = lastName;
         this.writtenBook = writtenBook;
+    }
+
+
+    public Author(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+
     }
 
     public Author(int authorId, String firstName, String lastName, Set<Book> writtenBook) {
@@ -59,6 +67,9 @@ public class Author {
     }
 
     public Set<Book> getWrittenBook() {
+        if (writtenBook == null)
+            writtenBook = new HashSet<>();
+
         return writtenBook;
     }
 
@@ -69,16 +80,16 @@ public class Author {
 
     //private Set<Book> writtenBook;
 
-    public void addWrittenBook(Book book){
-        if(book == null) throw new IllegalArgumentException("Book is null");
-        if(writtenBook.isEmpty()) writtenBook= new HashSet<>();
+    public void addWrittenBook(Book book) {
+        if (book == null) throw new IllegalArgumentException("Book is null");
+        if (writtenBook == null) writtenBook = new HashSet<>();
         writtenBook.add(book);
         book.getAuthors().add(this);
 
     }
 
 
-    public void removeWrittenBook(Book book){
+    public void removeWrittenBook(Book book) {
         book.getAuthors().remove(this);
         writtenBook.remove(book);
 
