@@ -23,7 +23,13 @@ public class AppUser {
     @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE})
     @JoinColumn(name = "details_id")     // Making foreign key here
     private Details details;
-    @OneToMany (mappedBy = "borrower")   // Owner class. So we need to populate list through convenience method
+
+
+    // Owner class. So we need to populate list through convenience method
+    @OneToMany (mappedBy = "borrower",
+            cascade =
+                    {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.REMOVE})
+
     private List<BookLoan> loan;
 
 

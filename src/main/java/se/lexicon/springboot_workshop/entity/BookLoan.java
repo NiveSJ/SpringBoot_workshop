@@ -1,4 +1,6 @@
 package se.lexicon.springboot_workshop.entity;
+import org.hibernate.action.internal.OrphanRemovalAction;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -17,7 +19,7 @@ public class BookLoan {
     private LocalDate dueDate;
 
     private boolean returned;
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "app_user_id")   // Foreign Key
     private AppUser borrower;
 
