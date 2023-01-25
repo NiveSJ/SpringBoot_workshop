@@ -163,6 +163,14 @@ public class AppCommandLineRunner implements CommandLineRunner {
 
 
 
+        // Executing Remove
+
+        System.out.println("\n>>>>>>>>>>>> Remove AppUser ");
+
+       appUserDAO.delete(appUser.getAppUserId());
+
+
+
 
 
 
