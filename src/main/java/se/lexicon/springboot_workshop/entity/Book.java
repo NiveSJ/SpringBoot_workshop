@@ -17,7 +17,9 @@ public class Book {
     @Column(nullable = false,length = 100)
     private String title;
 
-    @ManyToMany(mappedBy = "writtenBook",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    //mappedBy = "writtenBook"
+    @JoinTable(name = "book_author",joinColumns = @JoinColumn(name="book_id"),inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors;
 
     @Column(nullable = false)
