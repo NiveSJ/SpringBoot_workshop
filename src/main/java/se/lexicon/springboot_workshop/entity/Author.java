@@ -19,7 +19,7 @@ public class Author {
     // Added fetch type to remove Caused by: org.hibernate.LazyInitializationException: failed to lazily initialize a
     // collection of role: se.lexicon.springboot_workshop.entity.Author.writtenBook, could not initialize proxy -
     // no Session
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
     @JoinTable(name = "book_author",joinColumns = @JoinColumn(name="author_id"),inverseJoinColumns = @JoinColumn(name = "book_id"))
     private Set<Book> writtenBook;
 

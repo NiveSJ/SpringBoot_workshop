@@ -28,7 +28,7 @@ public class AppUser {
     // Owner class. So we need to populate list through convenience method
     @OneToMany (mappedBy = "borrower",
             cascade =
-                    {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.REMOVE})
+                    {CascadeType.REMOVE})
 
     private List<BookLoan> loan;
 

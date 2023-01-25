@@ -18,7 +18,7 @@ public class Book {
     @Column(nullable = false,length = 100)
     private String title;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
     //mappedBy = "writtenBook"
     @JoinTable(name = "book_author",joinColumns = @JoinColumn(name="book_id"),inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors;

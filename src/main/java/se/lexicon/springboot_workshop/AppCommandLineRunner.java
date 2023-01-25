@@ -167,7 +167,16 @@ public class AppCommandLineRunner implements CommandLineRunner {
 
         System.out.println("\n>>>>>>>>>>>> Remove AppUser ");
 
-       appUserDAO.delete(appUser.getAppUserId());
+       appUserDAO.delete(appUser1.getAppUserId());
+
+        authorDAO.delete(author1.getAuthorId());
+        bookLoanDAOimpl.delete(bookLoan1.getLoanId());
+
+        book.removeAuthorsset(author);
+
+        bookDAO.delete(book.getBookId());
+
+
 
 
 
