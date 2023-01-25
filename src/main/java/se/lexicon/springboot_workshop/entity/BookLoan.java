@@ -23,7 +23,7 @@ public class BookLoan {
     @JoinColumn(name = "app_user_id")   // Foreign Key
     private AppUser borrower;
 
-    @ManyToOne(cascade = {CascadeType.REMOVE,CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name= "book_id")  // Foreign Key
     private Book book;
 

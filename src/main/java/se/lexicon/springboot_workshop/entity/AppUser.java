@@ -20,7 +20,7 @@ public class AppUser {
     @Column(nullable = false)
     private LocalDate regDate;
     // if app User is removed then details has to be removed
-    @OneToOne(cascade = {CascadeType.DETACH,  CascadeType.REFRESH, CascadeType.REMOVE})
+    @OneToOne(cascade = {CascadeType.DETACH,CascadeType.REFRESH, CascadeType.REMOVE,CascadeType.PERSIST})
     @JoinColumn(name = "details_id")     // Making foreign key here
     private Details details;
 
