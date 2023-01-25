@@ -18,7 +18,7 @@ public class Book {
     @Column(nullable = false,length = 100)
     private String title;
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.EAGER)
     //mappedBy = "writtenBook"
     @JoinTable(name = "book_author",joinColumns = @JoinColumn(name="book_id"),inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors;
@@ -142,35 +142,26 @@ public class Book {
   }*/
 
 
-
-
-
-
-
-/*
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return bookId == book.bookId && maxLoanDays == book.maxLoanDays && Objects.equals(isbn, book.isbn) && Objects.equals(title, book.title) && Objects.equals(authors, book.authors);
+        return bookId == book.bookId && maxLoanDays == book.maxLoanDays && Objects.equals(isbn, book.isbn) && Objects.equals(title, book.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bookId, isbn, title, authors, maxLoanDays);
+        return Objects.hash(bookId, isbn, title, maxLoanDays);
     }
-*/
 
-
-/*    @Override
+    @Override
     public String toString() {
         return "Book{" +
                 "bookId=" + bookId +
                 ", isbn='" + isbn + '\'' +
                 ", title='" + title + '\'' +
-                ", authors=" + authors +
                 ", maxLoanDays=" + maxLoanDays +
                 '}';
-    }*/
+    }
 }

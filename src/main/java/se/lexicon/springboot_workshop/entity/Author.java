@@ -16,11 +16,13 @@ public class Author {
     @Column(nullable = false, length = 30)
     private String lastName;
 
-    // Added fetch type to remove Caused by: org.hibernate.LazyInitializationException: failed to lazily initialize a
+    // Added fetch type to remove error  Caused by: org.hibernate.LazyInitializationException: failed to lazily initialize a
     // collection of role: se.lexicon.springboot_workshop.entity.Author.writtenBook, could not initialize proxy -
     // no Session
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
-    @JoinTable(name = "book_author",joinColumns = @JoinColumn(name="author_id"),inverseJoinColumns = @JoinColumn(name = "book_id"))
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade ={ CascadeType.REMOVE,CascadeType.DETACH,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinTable(name = "book_author",
+            joinColumns = @JoinColumn(name="author_id"),inverseJoinColumns = @JoinColumn(name = "book_id"))
     private Set<Book> writtenBook;
 
     public Author() {
@@ -117,28 +119,25 @@ public class Author {
     }*/
 
 
-/*
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Author author = (Author) o;
-        return authorId == author.authorId && Objects.equals(firstName, author.firstName) && Objects.equals(lastName, author.lastName) && Objects.equals(writtenBook, author.writtenBook);
+        return authorId == author.authorId && Objects.equals(firstName, author.firstName) && Objects.equals(lastName, author.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(authorId, firstName, lastName, writtenBook);
+        return Objects.hash(authorId, firstName, lastName);
     }
-*/
 
-   /* @Override
+    @Override
     public String toString() {
         return "Author{" +
                 "authorId=" + authorId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", writtenBook=" + writtenBook +
                 '}';
-    }*/
+    }
 }

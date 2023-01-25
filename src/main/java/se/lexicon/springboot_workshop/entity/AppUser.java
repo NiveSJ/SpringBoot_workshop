@@ -20,7 +20,7 @@ public class AppUser {
     @Column(nullable = false)
     private LocalDate regDate;
     // if app User is removed then details has to be removed
-    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE})
+    @OneToOne(cascade = {CascadeType.DETACH,  CascadeType.REFRESH, CascadeType.REMOVE})
     @JoinColumn(name = "details_id")     // Making foreign key here
     private Details details;
 
@@ -28,7 +28,7 @@ public class AppUser {
     // Owner class. So we need to populate list through convenience method
     @OneToMany (mappedBy = "borrower",
             cascade =
-                    {CascadeType.REMOVE})
+                    {CascadeType.REMOVE,CascadeType.DETACH,CascadeType.PERSIST,CascadeType.REFRESH})
 
     private List<BookLoan> loan;
 

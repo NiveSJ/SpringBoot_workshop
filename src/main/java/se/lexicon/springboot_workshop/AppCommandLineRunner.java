@@ -3,6 +3,7 @@ package se.lexicon.springboot_workshop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import se.lexicon.springboot_workshop.DAO.impl.*;
 import se.lexicon.springboot_workshop.entity.*;
 
@@ -32,6 +33,7 @@ public class AppCommandLineRunner implements CommandLineRunner {
     }
 
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
 
         Details details = new Details("nive@gmail.com", "Nive", LocalDate.parse("1999-01-01"));
@@ -165,14 +167,14 @@ public class AppCommandLineRunner implements CommandLineRunner {
 
         // Executing Remove
 
-        System.out.println("\n>>>>>>>>>>>> Remove AppUser ");
+        System.out.println("\n>>>>>>>>>>>>Performing delete operations ");
 
-       appUserDAO.delete(appUser1.getAppUserId());
+       //appUserDAO.delete(appUser1.getAppUserId());
 
-        authorDAO.delete(author1.getAuthorId());
-        bookLoanDAOimpl.delete(bookLoan1.getLoanId());
+        //authorDAO.delete(author1.getAuthorId());
+      //  bookLoanDAOimpl.delete(bookLoan1.getLoanId());
 
-        book.removeAuthorsset(author);
+        //book.removeAuthorsset(author);
 
         bookDAO.delete(book.getBookId());
 
