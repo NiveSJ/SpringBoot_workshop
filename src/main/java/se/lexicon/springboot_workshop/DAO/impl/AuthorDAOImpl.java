@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import se.lexicon.springboot_workshop.DAO.IAuthorDAO;
 import se.lexicon.springboot_workshop.entity.Author;
-import se.lexicon.springboot_workshop.entity.Book;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,16 +18,16 @@ public class AuthorDAOImpl implements IAuthorDAO {
 
 
     @Override
-    @Transactional
+    @Transactional (readOnly = true)
     public Author findById(int id) {
         if(id == 0) throw new IllegalArgumentException(">> From Author DAO: Id Cannot be null");
         return entityManager.find(Author.class,id);
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public Collection<Author> findAll() {
-        return entityManager.createNamedQuery("findAll").getResultList();
+        return entityManager.createNamedQuery("Author.findAll").getResultList();
     }
 
     @Override

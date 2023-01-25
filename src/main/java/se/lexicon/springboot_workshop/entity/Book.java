@@ -17,7 +17,7 @@ public class Book {
     @Column(nullable = false,length = 100)
     private String title;
 
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToMany
     //mappedBy = "writtenBook"
     @JoinTable(name = "book_author",joinColumns = @JoinColumn(name="book_id"),inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors;
@@ -98,6 +98,26 @@ public class Book {
 
   //  private Set<Author> authors;
 
+
+    public void setAuthorsset(Author author)
+    {
+        if(author == null) throw new IllegalArgumentException("author cannot be null");
+        if (authors == null)
+            authors = new HashSet<>();
+        // Populate the set present in this class
+        authors.add(author);
+
+
+    }
+
+    public void removeAuthorsset(Author author){
+        if(author == null) throw new IllegalArgumentException("author cannot be null");
+
+          authors.remove(author);
+
+    }
+
+/*
   public void setAuthors(Author author)
   {
       if(author == null) throw new IllegalArgumentException("author cannot be null");
@@ -118,7 +138,7 @@ public class Book {
 
 
 
-  }
+  }*/
 
 
 

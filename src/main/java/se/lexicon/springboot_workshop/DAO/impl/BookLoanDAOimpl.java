@@ -18,16 +18,16 @@ public class BookLoanDAOimpl implements IBookLoanDAO {
 
 
     @Override
-    @Transactional
+    @Transactional (readOnly = true)
     public BookLoan findById(int id) {
         if(id == 0) throw new IllegalArgumentException(">> From BookLoan DAO: Id Cannot be null");
         return entityManager.find(BookLoan.class,id);
     }
 
     @Override
-    @Transactional
+    @Transactional (readOnly = true)
     public Collection<BookLoan> findAll() {
-        return entityManager.createNamedQuery("findAll").getResultList();
+        return entityManager.createNamedQuery("BookLoan.findAll").getResultList();
     }
 
     @Override
@@ -41,18 +41,18 @@ public class BookLoanDAOimpl implements IBookLoanDAO {
 
     @Override
     @Transactional
-    public BookLoan update(BookLoan BookLoan) {
-        if (BookLoan == null) throw new IllegalArgumentException("BookLoan Cannot be null");
+    public BookLoan update(BookLoan bookLoan) {
+        if (bookLoan == null) throw new IllegalArgumentException("BookLoan Cannot be null");
 
-        return entityManager.merge(BookLoan);
+        return entityManager.merge(bookLoan);
 
     }
 
     @Override
     @Transactional
     public void delete(int id) {
-        BookLoan BookLoan= entityManager.find(BookLoan.class,id);
-        if (BookLoan!= null) entityManager.remove(BookLoan);
+        BookLoan bookLoan= entityManager.find(BookLoan.class,id);
+        if (bookLoan!= null) entityManager.remove(bookLoan);
         else throw new IllegalArgumentException("no Item found to remove");
 
     }

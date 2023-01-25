@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import se.lexicon.springboot_workshop.DAO.IAppUserDAO;
 import se.lexicon.springboot_workshop.entity.AppUser;
-import se.lexicon.springboot_workshop.entity.AppUser;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,16 +17,16 @@ public class AppUserDAOImpl implements IAppUserDAO {
 
 
     @Override
-    @Transactional
+    @Transactional (readOnly = true)
     public AppUser findById(int id) {
         if(id == 0) throw new IllegalArgumentException(">> From AppUser DAO: Id Cannot be null");
         return entityManager.find(AppUser.class,id);
     }
 
     @Override
-    @Transactional
+    @Transactional (readOnly = true)
     public Collection<AppUser> findAll() {
-        return entityManager.createNamedQuery("findAll").getResultList();
+        return entityManager.createNamedQuery("AppUser.findAll").getResultList();
     }
 
     @Override
@@ -39,18 +39,18 @@ public class AppUserDAOImpl implements IAppUserDAO {
 
     @Override
     @Transactional
-    public AppUser update(AppUser AppUser) {
-        if (AppUser == null) throw new IllegalArgumentException("AppUser Cannot be null");
+    public AppUser update(AppUser appUser) {
+        if (appUser == null) throw new IllegalArgumentException("AppUser Cannot be null");
 
-        return entityManager.merge(AppUser);
+        return entityManager.merge(appUser);
 
     }
 
     @Override
     @Transactional
     public void delete(int id) {
-        AppUser AppUser= entityManager.find(AppUser.class,id);
-        if (AppUser!= null) entityManager.remove(AppUser);
+        AppUser appUser= entityManager.find(AppUser.class,id);
+        if (appUser!= null) entityManager.remove(appUser);
         else throw new IllegalArgumentException("no Item found to remove");
 
     }

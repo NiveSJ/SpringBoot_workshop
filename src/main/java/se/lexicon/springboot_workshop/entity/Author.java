@@ -81,6 +81,22 @@ public class Author {
 
     //private Set<Book> writtenBook;
 
+
+
+    public void addWrittenBook(Book book) {
+        if (book == null) throw new IllegalArgumentException("Book is null");
+        if (writtenBook == null) writtenBook = new HashSet<>();
+        writtenBook.add(book);
+
+    }
+
+
+    public void removeWrittenBook(Book book) {
+
+        writtenBook.remove(book);
+
+    }
+/*
     public void addWrittenBook(Book book) {
         if (book == null) throw new IllegalArgumentException("Book is null");
         if (writtenBook == null) writtenBook = new HashSet<>();
@@ -95,7 +111,7 @@ public class Author {
         writtenBook.remove(book);
 
 
-    }
+    }*/
 
 
     @Override
