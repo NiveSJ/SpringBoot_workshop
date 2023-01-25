@@ -7,6 +7,7 @@ import java.util.Set;
 
 @Entity
 @NamedQuery(name="Book.findAll",query = "FROM Book")
+
 public class Book {
 
     @Id
@@ -146,6 +147,7 @@ public class Book {
 
 
 
+/*
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -158,9 +160,10 @@ public class Book {
     public int hashCode() {
         return Objects.hash(bookId, isbn, title, authors, maxLoanDays);
     }
+*/
 
 
-    @Override
+/*    @Override
     public String toString() {
         return "Book{" +
                 "bookId=" + bookId +
@@ -169,5 +172,5 @@ public class Book {
                 ", authors=" + authors +
                 ", maxLoanDays=" + maxLoanDays +
                 '}';
-    }
+    }*/
 }

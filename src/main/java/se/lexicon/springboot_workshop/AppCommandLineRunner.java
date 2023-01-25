@@ -94,19 +94,77 @@ public class AppCommandLineRunner implements CommandLineRunner {
         bookLoanDAOimpl.create(bookLoan);
         bookLoanDAOimpl.create(bookLoan1);
 
+        //Find All Execution
+
         System.out.println( ">>Details of all appUser  :" +appUserDAO.findAll());
 
-       // System.out.println( ">>Details of all Author  :" );
-      //  authorDAO.findAll().forEach(author2 -> {System.out.println(author2);
-      //      System.out.println(author2.getWrittenBook());});
+
+
+        System.out.println( ">>Details of all Details Entity   :" +detailsDAO.findAll());
+
+
+        System.out.println( ">>Details of all BookLoan  :" +bookLoanDAOimpl.findAll());
+
+
+        System.out.println( ">>Details of all Author  :" );
+       authorDAO.findAll().forEach(author2 -> {System.out.println(author2);
+           System.out.println(author2.getWrittenBook());});
 
 
        System.out.println( ">>Details of all Book  :");
-       bookDAO.findAll().forEach(book3 -> {System.out.println(book3);
+      bookDAO.findAll().forEach(book3 -> {System.out.println(book3);
            System.out.println(book3.getAuthors());
-       });
-        //System.out.println( ">>Details of all BookLoan  :" +bookLoanDAOimpl.findAll());
-        //System.out.println( ">>Details of all Details  :" +detailsDAO.findAll());
+      });
+
+
+       // Find By Id With Entities
+
+        System.out.println("\n>>>>>>>>>>>> findby Id App User "+ appUserDAO.findById(appUser1.getAppUserId()));
+
+        System.out.println("\n>>>>>>>>>>>> findby Id App User "+ appUserDAO.findById(appUser.getAppUserId()));
+
+        System.out.println("\n>>>>>>>>>>>> findby Id App User "+ authorDAO.findById(author.getAuthorId()));
+
+        System.out.println("\n>>>>>>>>>>>> findby Id App User "+ authorDAO.findById(author1.getAuthorId()));
+
+        System.out.println("\n>>>>>>>>>>>> findby Id App User "+ bookDAO.findById(book.getBookId()));
+
+        System.out.println("\n>>>>>>>>>>>> findby Id App User "+ bookDAO.findById(book1.getBookId()));
+
+        System.out.println("\n>>>>>>>>>>>> findby Id App User "+ bookLoanDAOimpl.findById(bookLoan.getLoanId()));
+
+        System.out.println("\n>>>>>>>>>>>> findby Id App User "+ bookLoanDAOimpl.findById(bookLoan1.getLoanId()));
+
+
+        System.out.println("\n>>>>>>>>>>>> findby Id App User "+ detailsDAO.findById(details1.getDetailsId()));
+
+        System.out.println("\n>>>>>>>>>>>> findby Id App User "+ detailsDAO.findById(details.getDetailsId()));
+
+        // Update Entities
+
+        appUser.setUserName("Nivethitha");
+        System.out.println("\n>>>>>>>>>>>> Update App User "+ appUserDAO.update(appUser));
+
+        author1.setFirstName("Jack");
+
+        System.out.println("\n>>>>>>>>>>>> Update Author "+ authorDAO.update(author1));
+
+         book.setTitle("Data Structures");
+        System.out.println("\n>>>>>>>>>>>> Update Book "+ bookDAO.update(book));
+
+        bookLoan.setLoanDate(LocalDate.parse("2023-01-20"));
+        bookLoan.setBorrower(appUser1);
+        bookLoan.setBook(book2);
+        System.out.println("\n>>>>>>>>>>>> Update BookLoan "+ bookLoanDAOimpl.update(bookLoan));
+
+        details1.setEmail("Test@gmail.com");
+
+        System.out.println("\n>>>>>>>>>>>> Update Details "+ detailsDAO.update(details1));
+
+
+
+
+
 
 
 

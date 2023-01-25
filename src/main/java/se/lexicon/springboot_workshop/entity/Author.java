@@ -117,6 +117,7 @@ public class Author {
     }*/
 
 
+/*
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -129,8 +130,9 @@ public class Author {
     public int hashCode() {
         return Objects.hash(authorId, firstName, lastName, writtenBook);
     }
+*/
 
-    @Override
+   /* @Override
     public String toString() {
         return "Author{" +
                 "authorId=" + authorId +
@@ -138,5 +140,5 @@ public class Author {
                 ", lastName='" + lastName + '\'' +
                 ", writtenBook=" + writtenBook +
                 '}';
-    }
+    }*/
 }
