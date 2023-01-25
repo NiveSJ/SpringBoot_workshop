@@ -17,12 +17,12 @@ public class BookLoan {
     private LocalDate dueDate;
 
     private boolean returned;
-    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToOne
     @JoinColumn(name = "app_user_id")   // Foreign Key
     private AppUser borrower;
 
-    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinColumn(name= "book_id")
+    @ManyToOne
+    @JoinColumn(name= "book_id")  // Foreign Key
     private Book book;
 
 

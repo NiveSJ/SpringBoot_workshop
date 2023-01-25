@@ -16,7 +16,10 @@ public class Author {
     @Column(nullable = false, length = 30)
     private String lastName;
 
-    @ManyToMany
+    // Added fetch type to remove Caused by: org.hibernate.LazyInitializationException: failed to lazily initialize a
+    // collection of role: se.lexicon.springboot_workshop.entity.Author.writtenBook, could not initialize proxy -
+    // no Session
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "book_author",joinColumns = @JoinColumn(name="author_id"),inverseJoinColumns = @JoinColumn(name = "book_id"))
     private Set<Book> writtenBook;
 

@@ -40,8 +40,8 @@ public class AppUserDAOImpl implements IAppUserDAO {
     @Override
     @Transactional
     public AppUser update(AppUser appUser) {
-        if (appUser == null) throw new IllegalArgumentException("AppUser Cannot be null");
 
+        if (appUser == null) throw new IllegalArgumentException("AppUser Cannot be null");
         return entityManager.merge(appUser);
 
     }
