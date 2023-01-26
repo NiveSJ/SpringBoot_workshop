@@ -1,13 +1,23 @@
 package se.lexicon.springboot_workshop.daoTest;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Transactional;
 import se.lexicon.springboot_workshop.DAO.impl.AppUserDAOImpl;
+import se.lexicon.springboot_workshop.DAO.impl.AuthorDAOImpl;
+import se.lexicon.springboot_workshop.DAO.impl.BookDAOImpl;
 import se.lexicon.springboot_workshop.DAO.impl.DetailsDAOImpl;
 import se.lexicon.springboot_workshop.entity.AppUser;
+import se.lexicon.springboot_workshop.entity.Author;
+import se.lexicon.springboot_workshop.entity.Book;
 import se.lexicon.springboot_workshop.entity.Details;
 
 import java.time.LocalDate;
@@ -15,64 +25,91 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@SpringBootTest
+@AutoConfigureTestDatabase
+@Transactional
+@AutoConfigureTestEntityManager
+@DirtiesContext
 public class AuthorDAOImplTest {
 
     @Autowired
     TestEntityManager testEntityManager;
     @Autowired
-    AppUserDAOImpl appUserDAOTest;
+    AuthorDAOImpl authorDAOTest;
     @Autowired
-    DetailsDAOImpl detailsDAOTest;
+    BookDAOImpl bookDAOImplTest;
 
 
     Details details;
 
     AppUser appUser;
+
     @BeforeEach
     public void setup() {
-        details = new Details("nive1@gmail.com", "Nive1", LocalDate.parse("1999-01-01"));
-        appUser = new AppUser("Nive1", "1234", LocalDate.now(), details);
-        appUser.setDetails(details);
+        Author author = new Author("schilberschatz", "Anders");
+        testEntityManager.persist(author);
+        //authorDAOTest.create(author);
 
-        Details createdDetails = testEntityManager.persist(details);
-        AppUser createdAppUser = testEntityManager.persist(appUser);
+        Author author1 = new Author("John", "Wakerly");
+        testEntityManager.persist(author1);
+        //authorDAOTest.create(author1);
+
+
+        Book book = new Book("As157", "Digital Principle and digital Design", 10);
+        book.setAuthorsset(author);
+        testEntityManager.persist(book);
+        // bookDAOImplTest.create(book);
+
+
+        Book book1 = new Book("Asbn167", "Distributed Networks", 10);
+        book1.setAuthorsset(author);
+        testEntityManager.persist(book1);
+        // bookDAOImplTest.create(book1);
+
+        Book book2 = new Book("As237", "Mobile Computing", 10);
+        book2.setAuthorsset(author1);
+        testEntityManager.persist(book2);
+
+        //bookDAOImplTest.create(book2);
 
     }
 
     @Test
     public void persist() {
 
-        Details details2 = new Details("Test1@gmail.com", "Test1", LocalDate.parse("1999-01-01"));
-        AppUser appUser2 = new AppUser("Test1", "1234", LocalDate.now(), details2);
+
+        Author authortest = new Author("Rod", "Jhonson");
+        Author authorCreated = authorDAOTest.create(authortest);
+
+        Book booktest = new Book("As157", "Digital Principle and digital Design", 10);
+        booktest.setAuthorsset(authortest);
+
+        Book bookCreated = bookDAOImplTest.create(booktest);
 
 
-        Details details3 = new Details("Test1@gmail.com", "Test1", LocalDate.parse("1999-01-01"));
-        AppUser appUser3 = new AppUser("Test1", "1234", LocalDate.now(), details2);
+        assertNotNull(authorCreated);
+        assertNotNull(authorCreated.getAuthorId());
 
-        AppUser createdAppUser2= appUserDAOTest.create(appUser2);
-        Details createdDetails2=detailsDAOTest.create(details2);
-
-
-        assertNotNull(createdAppUser2);
-        assertNotNull(createdAppUser2.getAppUserId());
-
-        assertNotNull(createdDetails2);
-        assertNotNull(createdDetails2.getDetailsId());
+        assertNotNull(booktest);
+        assertNotNull(booktest.getBookId());
 
         // Since Mail is Unique key
-        assertThrows(DataIntegrityViolationException.class,()->{appUserDAOTest.create(appUser3);});
-        assertThrows(DataIntegrityViolationException.class,()->{detailsDAOTest.create(details3);});
+
+ // To check nullable column
+        assertThrows(DataIntegrityViolationException.class,()->{ authorDAOTest.create(new Author());});
+
+
     }
 
-
+/*
     @Test
     public void findall() {
-        assertEquals(appUserDAOTest.findAll().size(),3);
+        assertEquals(appUserDAOTest.findAll().size(), 3);
     }
 
     @Test
     public void findById() {
-        assertEquals(appUserDAOTest.findById(appUser.getAppUserId()).getAppUserId(),3);
+        assertEquals(appUserDAOTest.findById(appUser.getAppUserId()).getAppUserId(), 3);
     }
 
     @Test
@@ -80,6 +117,6 @@ public class AuthorDAOImplTest {
     public void delete() {
 
         appUserDAOTest.delete(3);
-        assertEquals(appUserDAOTest.findAll().size(),2);
-    }
+        assertEquals(appUserDAOTest.findAll().size(), 2);
+    }*/
 }
