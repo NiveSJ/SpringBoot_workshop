@@ -3,6 +3,7 @@ import org.hibernate.action.internal.OrphanRemovalAction;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -32,7 +33,7 @@ public class BookLoan {
 
     }
 
-    public BookLoan(LocalDate loanDate, LocalDate dueDate, boolean returned, AppUser borrower, Book book) {
+    public BookLoan(LocalDate loanDate, LocalDate dueDate, boolean returned, AppUser borrower,Book book) {
         this.loanDate = loanDate;
         this.dueDate = dueDate;
         this.returned = returned;
@@ -105,12 +106,6 @@ public class BookLoan {
     public void setBook(Book book) {
         this.book = book;
     }
-
-
-
-
-
-
 
     @Override
     public boolean equals(Object o) {

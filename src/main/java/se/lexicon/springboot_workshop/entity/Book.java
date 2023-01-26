@@ -12,7 +12,7 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int bookId;
+    private int bookid;
     @Column(nullable = false,length = 100)
     private String isbn;
     @Column(nullable = false,length = 100)
@@ -43,8 +43,8 @@ public class Book {
         this.maxLoanDays = maxLoanDays;
     }
 
-    public Book(int bookId, String isbn, String title, Set<Author> authors, int maxLoanDays) {
-        this.bookId = bookId;
+    public Book(int bookid, String isbn, String title, Set<Author> authors, int maxLoanDays) {
+        this.bookid = bookid;
         this.isbn = isbn;
         this.title = title;
         setAuthors(authors);
@@ -53,11 +53,11 @@ public class Book {
 
 
     public int getBookId() {
-        return bookId;
+        return bookid;
     }
 
     public void setBookId(int bookId) {
-        this.bookId = bookId;
+        this.bookid = bookid;
     }
 
     public String getIsbn() {
@@ -147,18 +147,18 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return bookId == book.bookId && maxLoanDays == book.maxLoanDays && Objects.equals(isbn, book.isbn) && Objects.equals(title, book.title);
+        return bookid == book.bookid && maxLoanDays == book.maxLoanDays && Objects.equals(isbn, book.isbn) && Objects.equals(title, book.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bookId, isbn, title, maxLoanDays);
+        return Objects.hash(bookid, isbn, title, maxLoanDays);
     }
 
     @Override
     public String toString() {
         return "Book{" +
-                "bookId=" + bookId +
+                "bookId=" + bookid +
                 ", isbn='" + isbn + '\'' +
                 ", title='" + title + '\'' +
                 ", maxLoanDays=" + maxLoanDays +

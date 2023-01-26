@@ -8,6 +8,8 @@ import se.lexicon.springboot_workshop.DAO.impl.*;
 import se.lexicon.springboot_workshop.entity.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -82,7 +84,7 @@ public class AppCommandLineRunner implements CommandLineRunner {
 
 
 
-      // Crerating Book Loan Entry in DB
+      // creating Book Loan Entry in DB
 
         BookLoan bookLoan = new BookLoan(LocalDate.now(), LocalDate.parse("2023-02-01"), false);
         bookLoan.setBorrower(appUser);
@@ -90,96 +92,11 @@ public class AppCommandLineRunner implements CommandLineRunner {
 
         BookLoan bookLoan1 = new BookLoan(LocalDate.now(), LocalDate.parse("2023-02-01"), false);
         bookLoan1.setBorrower(appUser1);
-        bookLoan1.setBook(book1);
+        bookLoan1.setBook(book2);
 
 
         bookLoanDAOimpl.create(bookLoan);
         bookLoanDAOimpl.create(bookLoan1);
-
-        //Find All Execution
-
-        System.out.println( ">>Details of all appUser  :" +appUserDAO.findAll());
-
-
-
-        System.out.println( ">>Details of all Details Entity   :" +detailsDAO.findAll());
-
-
-        System.out.println( ">>Details of all BookLoan  :" +bookLoanDAOimpl.findAll());
-
-
-        System.out.println( ">>Details of all Author  :" );
-       authorDAO.findAll().forEach(author2 -> {System.out.println(author2);
-           System.out.println(author2.getWrittenBook());});
-
-
-       System.out.println( ">>Details of all Book  :");
-      bookDAO.findAll().forEach(book3 -> {System.out.println(book3);
-           System.out.println(book3.getAuthors());
-      });
-
-
-       // Find By Id With Entities
-
-        System.out.println("\n>>>>>>>>>>>> findby Id App User "+ appUserDAO.findById(appUser1.getAppUserId()));
-
-        System.out.println("\n>>>>>>>>>>>> findby Id App User "+ appUserDAO.findById(appUser.getAppUserId()));
-
-        System.out.println("\n>>>>>>>>>>>> findby Id App User "+ authorDAO.findById(author.getAuthorId()));
-
-        System.out.println("\n>>>>>>>>>>>> findby Id App User "+ authorDAO.findById(author1.getAuthorId()));
-
-        System.out.println("\n>>>>>>>>>>>> findby Id App User "+ bookDAO.findById(book.getBookId()));
-
-        System.out.println("\n>>>>>>>>>>>> findby Id App User "+ bookDAO.findById(book1.getBookId()));
-
-        System.out.println("\n>>>>>>>>>>>> findby Id App User "+ bookLoanDAOimpl.findById(bookLoan.getLoanId()));
-
-        System.out.println("\n>>>>>>>>>>>> findby Id App User "+ bookLoanDAOimpl.findById(bookLoan1.getLoanId()));
-
-
-        System.out.println("\n>>>>>>>>>>>> findby Id App User "+ detailsDAO.findById(details1.getDetailsId()));
-
-        System.out.println("\n>>>>>>>>>>>> findby Id App User "+ detailsDAO.findById(details.getDetailsId()));
-
-        // Update Entities
-
-        appUser.setUserName("Nivethitha");
-        System.out.println("\n>>>>>>>>>>>> Update App User "+ appUserDAO.update(appUser));
-
-        author1.setFirstName("Jack");
-
-        System.out.println("\n>>>>>>>>>>>> Update Author "+ authorDAO.update(author1));
-
-         book.setTitle("Data Structures");
-        System.out.println("\n>>>>>>>>>>>> Update Book "+ bookDAO.update(book));
-
-        bookLoan.setLoanDate(LocalDate.parse("2023-01-20"));
-        bookLoan.setBorrower(appUser1);
-        bookLoan.setBook(book2);
-        System.out.println("\n>>>>>>>>>>>> Update BookLoan "+ bookLoanDAOimpl.update(bookLoan));
-
-        details1.setEmail("Test@gmail.com");
-
-        System.out.println("\n>>>>>>>>>>>> Update Details "+ detailsDAO.update(details1));
-
-
-
-        // Executing Remove
-
-        System.out.println("\n>>>>>>>>>>>>Performing delete operations ");
-
-       //appUserDAO.delete(appUser1.getAppUserId());
-
-        //authorDAO.delete(author1.getAuthorId());
-      //  bookLoanDAOimpl.delete(bookLoan1.getLoanId());
-
-        //book.removeAuthorsset(author);
-
-        bookDAO.delete(book.getBookId());
-
-
-
 
 
 
