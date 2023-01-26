@@ -97,7 +97,7 @@ public class AuthorDAOImplTest {
 
 
         // To check nullable column
-        //   assertThrows(DataIntegrityViolationException.class,()->{ authorDAOTest.create(new Author());});
+           assertThrows(DataIntegrityViolationException.class,()->{ authorDAOTest.create(new Author());});
 
 
     }
@@ -132,17 +132,15 @@ public class AuthorDAOImplTest {
         Author authortest = new Author("Rod", "Jhonson");
         authorCreated = authorDAOTest.create(authortest);
 
-       int id= authorCreated.getAuthorId();
-
         Book booktest = new Book("As157", "Digital Principle and digital Design", 10);
-        booktest.setAuthorsset(authortest);
+        booktest.setAuthorsset(authorCreated);
 
         bookCreated = bookDAOImplTest.create(booktest);
          // reference https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/jpql-inner-join.html
 
         assertEquals(   testEntityManager.getEntityManager().
                 createQuery("SELECT a  FROM Author a inner JOIN  a.writtenBook b WHERE a.id = ?1")
-                .setParameter(1,id)
+                .setParameter(1,authorCreated.getAuthorId())
                 .getSingleResult(),authorCreated);
 
 

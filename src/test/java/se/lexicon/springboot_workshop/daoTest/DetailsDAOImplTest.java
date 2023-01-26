@@ -62,7 +62,6 @@ public class DetailsDAOImplTest {
         assertEquals(detailsDAOTest.findAll().size(),3);
 
         Details createdDetails2=detailsDAOTest.create(details2);
-
         assertEquals(detailsDAOTest.findAll().size(),4);
     }
 
