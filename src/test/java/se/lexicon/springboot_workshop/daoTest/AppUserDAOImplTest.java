@@ -34,7 +34,7 @@ public class AppUserDAOImplTest {
     DetailsDAOImpl detailsDAOTest;
 
 
-    Details details;
+    Details details,details2,details3;
 
     AppUser appUser;
     @BeforeEach
@@ -56,7 +56,7 @@ public class AppUserDAOImplTest {
 
 
         Details details3 = new Details("Test1@gmail.com", "Test1", LocalDate.parse("1999-01-01"));
-        AppUser appUser3 = new AppUser("Test1", "1234", LocalDate.now(), details2);
+        AppUser appUser3 = new AppUser("Test1", "1234", LocalDate.now(), details3);
 
         AppUser createdAppUser2= appUserDAOTest.create(appUser2);
         Details createdDetails2=detailsDAOTest.create(details2);
@@ -75,21 +75,42 @@ public class AppUserDAOImplTest {
 
 
 @Test
-    public void findall() {
-       assertEquals(appUserDAOTest.findAll().size(),3);
+    public void findAll() {
+
+    Details details2 = new Details("Test2@gmail.com", "Test2", LocalDate.parse("1999-01-01"));
+    AppUser appUser2 = new AppUser("Test2", "1234", LocalDate.now(), details2);
+
+
+    AppUser createdAppUser2= appUserDAOTest.create(appUser2);
+    Details createdDetails2=detailsDAOTest.create(details2);
+
+
+       assertEquals(appUserDAOTest.findAll().size(),4);
     }
 
 @Test
     public void findById() {
-        assertEquals(appUserDAOTest.findById(appUser.getAppUserId()).getAppUserId(),3);
+
+    Details details2 = new Details("Test3@gmail.com", "Test3", LocalDate.parse("1999-01-01"));
+    AppUser appUser2 = new AppUser("Test3", "1234", LocalDate.now(), details2);
+
+
+    AppUser createdAppUser2= appUserDAOTest.create(appUser2);
+    Details createdDetails2=detailsDAOTest.create(details2);
+        assertEquals(appUserDAOTest.findById(createdAppUser2.getAppUserId()).getAppUserId(),4);
     }
 
     @Test
 
     public void delete() {
 
-    appUserDAOTest.delete(3);
-        assertEquals(appUserDAOTest.findAll().size(),2);
+        Details details2 = new Details("Test4@gmail.com", "Test4", LocalDate.parse("1999-01-01"));
+        AppUser appUser2 = new AppUser("Test4", "1234", LocalDate.now(), details2);
+
+
+        AppUser createdAppUser2= appUserDAOTest.create(appUser2);
+        appUserDAOTest.delete(3);
+        assertEquals(appUserDAOTest.findAll().size(),3);
     }
 
 

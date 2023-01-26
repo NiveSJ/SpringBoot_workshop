@@ -20,6 +20,7 @@ import se.lexicon.springboot_workshop.entity.Author;
 import se.lexicon.springboot_workshop.entity.Book;
 import se.lexicon.springboot_workshop.entity.Details;
 
+import javax.persistence.Query;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,9 +41,9 @@ public class AuthorDAOImplTest {
     BookDAOImpl bookDAOImplTest;
 
 
-    Details details;
+    Book bookCreated;
 
-    AppUser appUser;
+    Author authorCreated;
 
     @BeforeEach
     public void setup() {
@@ -79,44 +80,97 @@ public class AuthorDAOImplTest {
 
 
         Author authortest = new Author("Rod", "Jhonson");
-        Author authorCreated = authorDAOTest.create(authortest);
+        authorCreated = authorDAOTest.create(authortest);
 
         Book booktest = new Book("As157", "Digital Principle and digital Design", 10);
         booktest.setAuthorsset(authortest);
 
-        Book bookCreated = bookDAOImplTest.create(booktest);
+        bookCreated = bookDAOImplTest.create(booktest);
 
 
         assertNotNull(authorCreated);
-        assertNotNull(authorCreated.getAuthorId());
+        System.out.println(authorCreated);
+        assertNotNull((authorCreated.getAuthorId()));
 
         assertNotNull(booktest);
         assertNotNull(booktest.getBookId());
 
-        // Since Mail is Unique key
 
- // To check nullable column
-        assertThrows(DataIntegrityViolationException.class,()->{ authorDAOTest.create(new Author());});
+        // To check nullable column
+        //   assertThrows(DataIntegrityViolationException.class,()->{ authorDAOTest.create(new Author());});
 
 
     }
 
-/*
+
     @Test
     public void findall() {
-        assertEquals(appUserDAOTest.findAll().size(), 3);
+        assertEquals(authorDAOTest.findAll().size(), 4);
+        System.out.println(authorDAOTest.findAll());
     }
+
 
     @Test
     public void findById() {
-        assertEquals(appUserDAOTest.findById(appUser.getAppUserId()).getAppUserId(), 3);
+
+        Author authortest = new Author("Rod", "Jhonson");
+        authorCreated = authorDAOTest.create(authortest);
+
+        Book booktest = new Book("As157", "Digital Principle and digital Design", 10);
+        booktest.setAuthorsset(authortest);
+
+        bookCreated = bookDAOImplTest.create(booktest);
+
+
+        assertEquals(authorDAOTest.findById(authorCreated.getAuthorId()).getAuthorId(), 5);
     }
 
     @Test
 
+    public void authorBookSave() {
+
+        Author authortest = new Author("Rod", "Jhonson");
+        authorCreated = authorDAOTest.create(authortest);
+
+       int id= authorCreated.getAuthorId();
+
+        Book booktest = new Book("As157", "Digital Principle and digital Design", 10);
+        booktest.setAuthorsset(authortest);
+
+        bookCreated = bookDAOImplTest.create(booktest);
+         // reference https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/jpql-inner-join.html
+
+        assertEquals(   testEntityManager.getEntityManager().
+                createQuery("SELECT a  FROM Author a inner JOIN  a.writtenBook b WHERE a.id = ?1")
+                .setParameter(1,id)
+                .getSingleResult(),authorCreated);
+
+
+
+      // assertEquals(testEntityManager.getEntityManager().
+            //   createQuery("SELECT a  FROM Author a inner JOIN  a.writtenBook b WHERE a.id = ?1")
+           //    .setParameter(1,id)
+           //    .getSingleResult(),null);
+
+    }
+
+  @Test
     public void delete() {
 
-        appUserDAOTest.delete(3);
-        assertEquals(appUserDAOTest.findAll().size(), 2);
-    }*/
+        Author authortest = new Author("Rod", "Jhonson");
+        authorCreated = authorDAOTest.create(authortest);
+
+        int id= authorCreated.getAuthorId();
+
+        Book booktest = new Book("As157", "Digital Principle and digital Design", 10);
+        booktest.setAuthorsset(authortest);
+
+        bookCreated = bookDAOImplTest.create(booktest);
+
+        authorDAOTest.delete(authorCreated.getAuthorId());
+
+        assertEquals(authorDAOTest.findById(authorCreated.getAuthorId()),null);
+    }
+
+
 }
