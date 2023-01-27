@@ -118,6 +118,24 @@ public class BookLoanDAOImplTest {
         assertEquals(bookLoanDAOimpl.findById(CreatedBookLoan.getLoanId()).getLoanId(), 4);
     }
 
+    @Test
+    public void merge() {
+
+
+        bookLoan = new BookLoan(LocalDate.now(), LocalDate.parse("2023-02-01"), false);
+        bookLoan.setBorrower(appUser);
+        bookLoan.setBook(book);
+
+        Book book1 = new Book("As157", "Computer Networks", 10);
+
+        BookLoan CreatedBookLoan = bookLoanDAOimpl.create(bookLoan);
+
+        CreatedBookLoan.setBook(book1);
+
+        bookLoanDAOimpl.update(CreatedBookLoan);
+
+        assertEquals(CreatedBookLoan.getBook(),book1);
+    }
 
 
 

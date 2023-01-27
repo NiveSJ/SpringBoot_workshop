@@ -106,7 +106,7 @@ public class AuthorDAOImplTest {
     @Test
     public void findall() {
         assertEquals(authorDAOTest.findAll().size(), 4);
-        System.out.println(authorDAOTest.findAll());
+
     }
 
 
@@ -150,6 +150,25 @@ public class AuthorDAOImplTest {
            //    .setParameter(1,id)
            //    .getSingleResult(),null);
 
+    }
+
+    @Test
+    public void merge() {
+
+
+        Author authortest = new Author("Rod", "Jhonson");
+        authorCreated = authorDAOTest.create(authortest);
+
+        Book booktest = new Book("As157", "Digital Principle and digital Design", 10);
+        booktest.setAuthorsset(authorCreated);
+
+        bookCreated = bookDAOImplTest.create(booktest);
+
+        authorCreated.setFirstName("MergeTest");
+
+        authorDAOTest.update(authorCreated);
+
+        assertEquals(authorCreated.getFirstName(),"MergeTest");
     }
 
   @Test

@@ -155,6 +155,27 @@ public class BookDAOImplTest {
 
     }
 
+    @Test
+    public void merge() {
+
+
+        Author authortest = new Author("Rod", "Jhonson");
+        authorCreated = authorDAOTest.create(authortest);
+
+
+
+        Book booktest = new Book("As157", "Digital Principle and digital Design", 10);
+        booktest.setAuthorsset(authortest);
+
+        bookCreated = bookDAOImplTest.create(booktest);
+
+        bookCreated.setTitle("MergeTest");
+
+        bookDAOImplTest.update(bookCreated);
+
+        assertEquals(bookCreated.getTitle(),"MergeTest");
+    }
+
   @Test
     public void delete() {
 
