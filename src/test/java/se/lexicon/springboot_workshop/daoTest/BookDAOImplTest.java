@@ -23,6 +23,7 @@ import se.lexicon.springboot_workshop.entity.Details;
 import javax.persistence.Query;
 import java.time.LocalDate;
 
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -193,7 +194,11 @@ public class BookDAOImplTest {
 
        bookDAOImplTest.delete(bookCreated.getBookId());
 
-       assertEquals(authorDAOTest.findById(7),null);
+      assertThrows(javax.persistence.NoResultException.class,()->
+      {testEntityManager.getEntityManager(). createQuery("SELECT a  FROM Book a inner JOIN  a.authors b WHERE a.id = ?1")
+                        .setParameter(1,bookCreated.getBookId()).getSingleResult(); })  ;
+
+
     }
 
 

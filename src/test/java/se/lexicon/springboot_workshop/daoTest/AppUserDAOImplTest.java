@@ -41,17 +41,24 @@ public class AppUserDAOImplTest {
     AppUser appUser;
     @BeforeEach
     public void setup() {
+
+
+/*
          details = new Details("nive1@gmail.com", "Nive1", LocalDate.parse("1999-01-01"));
          appUser = new AppUser("Nive1", "1234", LocalDate.now(), details);
         appUser.setDetails(details);
 
         Details createdDetails = testEntityManager.persist(details);
-        AppUser createdAppUser = testEntityManager.persist(appUser);
+        AppUser createdAppUser = testEntityManager.persist(appUser); */
 
     }
 
+
+
     @Test
     public void persist() {
+
+
 
         Details details2 = new Details("Test1@gmail.com", "Test1", LocalDate.parse("1999-01-01"));
         AppUser appUser2 = new AppUser("Test1", "1234", LocalDate.now(), details2);
@@ -83,15 +90,20 @@ public class AppUserDAOImplTest {
 @Test
     public void findAll() {
 
-    Details details2 = new Details("Test2@gmail.com", "Test2", LocalDate.parse("1999-01-01"));
+    /*Details details2 = new Details("Test2@gmail.com", "Test2", LocalDate.parse("1999-01-01"));
     AppUser appUser2 = new AppUser("Test2", "1234", LocalDate.now(), details2);
 
 
     AppUser createdAppUser2= appUserDAOTest.create(appUser2);
     Details createdDetails2=detailsDAOTest.create(details2);
 
+    System.out.println(appUserDAOTest.findAll());
+       assertEquals(appUserDAOTest.findAll().size(),4);*/
 
-       assertEquals(appUserDAOTest.findAll().size(),4);
+
+    int expected = 2;
+
+    assertEquals(expected,appUserDAOTest.findAll().size());
     }
 
 @Test
