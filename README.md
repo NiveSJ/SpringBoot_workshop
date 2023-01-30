@@ -2,7 +2,7 @@
 
 Simple Library Management Spring Boot App with Hibernate implementation of JPA.
 
-Concepts used:
+**Concepts used:**
 
 • JPA / Hibernate
 
